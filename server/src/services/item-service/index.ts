@@ -1,13 +1,6 @@
 import { knex } from '../../database';
 
-export type Item = {
-  id: number;
-  name: string;
-  description?: string;
-  quantity: number;
-  createdAt: Date;
-  updatedAt: Date;
-};
+import { Item } from 'types/item';
 
 export const create = async (
   { name, description, quantity }: Omit<Item, 'id' | 'createdAt' | 'updatedAt'>,
@@ -22,11 +15,11 @@ export const create = async (
 export const search = async (db = knex): Promise<Item[]> =>
   await db('items').select('*');
 
-export const find = async (id: number, db = knex): Promise<Item | undefined> =>
+export const find = async (id: string, db = knex): Promise<Item | undefined> =>
   (await db('items').select('*').where('id', id).first()) || undefined;
 
 export const update = async (
-  updated: Partial<Omit<Item, 'createdAt' | 'updatedAt'>> & { id: number },
+  updated: Partial<Omit<Item, 'createdAt' | 'updatedAt'>> & { id: string },
   db = knex
 ) =>
   await db('items')
@@ -36,5 +29,5 @@ export const update = async (
       updatedAt: Date.now(),
     });
 
-export const remove = async (id: number, db = knex): Promise<Item> =>
+export const remove = async (id: string, db = knex): Promise<Item> =>
   await db('items').where('id', id).del();

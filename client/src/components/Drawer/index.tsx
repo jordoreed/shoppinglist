@@ -6,6 +6,7 @@ import styles from './index.module.css';
 type DrawerProps = PropsWithChildren & {
   title: string;
   open: boolean;
+  primaryActionText: string;
   onClose: () => void;
   onPrimaryAction: () => void;
 };
@@ -14,6 +15,7 @@ export const Drawer: FC<DrawerProps> = ({
   children,
   title,
   open,
+  primaryActionText,
   onClose,
   onPrimaryAction,
 }) => {
@@ -29,7 +31,7 @@ export const Drawer: FC<DrawerProps> = ({
       <footer>
         <div className={styles.footerButtons}>
           <Button onClick={onClose}>Cancel</Button>
-          <Button onClick={onPrimaryAction}>Add Item</Button>
+          <Button onClick={onPrimaryAction}>{primaryActionText}</Button>
         </div>
         <div className={styles.bottomBar} />
       </footer>
