@@ -1,0 +1,9 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  min-width: 560px;
+}
+
+.form .input {
+  margin-bottom: 1rem;
+}
