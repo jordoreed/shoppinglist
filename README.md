@@ -28,3 +28,5 @@ npm start
 I didn't get around to making it _exactly_ like the designs. I've got take-homes and interviews from a lot of companies I simply don't have time.
 
 If I were building to this for realsies I would have gone a lot harder on trying to extract all the colors out into some sort of theme file. I started down that route but ended up cutting corners to get this thing done.
+
+I've never used material-ui until this. I'm sure I screwed up conventions, but what can I say... this was the hugest take-home I've ever been asked to do 🤷
