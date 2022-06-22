@@ -11,7 +11,9 @@ export const ListEmptyState: FC<ListEmptyStateProps> = ({ onAddItem }) => {
   return (
     <div className={styles.container}>
       <p>Your shopping list is empty :(</p>
-      <Button onClick={onAddItem}>Add your first item</Button>
+      <Button onClick={onAddItem} variant="contained">
+        Add your first item
+      </Button>
     </div>
   );
 };

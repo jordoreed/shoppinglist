@@ -23,7 +23,11 @@ export const Drawer: FC<DrawerProps> = ({
     <MaterialDrawer anchor="right" open={open} onClose={onClose}>
       <header className={styles.header}>
         <div>{title}</div>
-        <IconButton aria-label="delete" size="large" onClick={onClose}>
+        <IconButton
+          aria-label="Close item drawer"
+          size="large"
+          onClick={onClose}
+        >
           <div className="material-icons">last_page</div>
         </IconButton>
       </header>
@@ -31,7 +35,9 @@ export const Drawer: FC<DrawerProps> = ({
       <footer>
         <div className={styles.footerButtons}>
           <Button onClick={onClose}>Cancel</Button>
-          <Button onClick={onPrimaryAction}>{primaryActionText}</Button>
+          <Button onClick={onPrimaryAction} variant="contained">
+            {primaryActionText}
+          </Button>
         </div>
         <div className={styles.bottomBar} />
       </footer>

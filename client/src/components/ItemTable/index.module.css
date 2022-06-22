@@ -1,0 +1,55 @@
+.container {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  border: 0.5px solid #d5dfe9;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.checked {
+  background-color: rgba(213, 223, 233, 0.17);
+}
+
+.nameDescription {
+  flex: 1;
+  padding-left: 1rem;
+}
+
+.description {
+  color: #7d7a7a;
+  font-size: 14px;
+}
+
+.checked .nameDescription {
+  text-decoration: line-through;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.deleteItemDialog {
+  padding: 2rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttons :first-child {
+  margin-right: 1rem;
+}

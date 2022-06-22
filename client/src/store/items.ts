@@ -45,7 +45,7 @@ export const updateItem = createAsyncThunk(
 
 export const deleteItem = createAsyncThunk(
   'deleteItem',
-  async (itemId: number) => {
+  async (itemId: string) => {
     await fetch(`${process.env.REACT_APP_BASE_API_URL}/items/${itemId}`, {
       method: 'DELETE',
     });

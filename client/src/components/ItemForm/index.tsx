@@ -48,6 +48,7 @@ export const ItemForm = React.forwardRef<HTMLFormElement, ItemFormProps>(
           variant="outlined"
           className={styles.input}
           value={item.name}
+          required
           onChange={(event) => {
             setItem({
               ...item,
@@ -78,6 +79,7 @@ export const ItemForm = React.forwardRef<HTMLFormElement, ItemFormProps>(
             id="item-quantity-select"
             label="Quantity"
             value={item.quantity}
+            required
             onChange={(event) => {
               setItem({
                 ...item,

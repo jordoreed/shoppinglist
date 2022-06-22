@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { Drawer } from '../components/Drawer';
 import { FormItem, ItemForm } from '../components/ItemForm';
+import { ItemTable } from '../components/ItemTable';
 import { ListEmptyState } from '../components/ListEmptyState';
 import { RootState, useAppDispatch } from '../store';
 import { fetchItems, createItem, updateItem, deleteItem } from '../store/items';
@@ -18,6 +19,7 @@ const defaultItem: FormItem = {
 
 export const App = () => {
   const [currentItem, setCurrentItem] = useState<FormItem>();
+  const [loading, setLoading] = useState(false);
   const items = useSelector((state: RootState) => state.items.items);
   const dispatch = useAppDispatch();
   const formRef = useRef<HTMLFormElement>(null);
@@ -26,6 +28,7 @@ export const App = () => {
   const refreshList = () => dispatch(fetchItems());
 
   const onSubmit = async (item: FormItem) => {
+    setLoading(true);
     if (isNewItem) {
       await dispatch(createItem(item));
       await refreshList();
@@ -33,11 +36,20 @@ export const App = () => {
       await dispatch(updateItem(item));
       await refreshList();
     }
+    setLoading(false);
     setCurrentItem(undefined);
   };
 
+  const onDelete = async (itemId: string) => {
+    setLoading(true);
+    await dispatch(deleteItem(itemId));
+    await refreshList();
+    setLoading(false);
+  };
+
   useEffect(() => {
-    refreshList();
+    setLoading(true);
+    refreshList().then(() => setLoading(false));
   }, []);
 
   return (
@@ -49,11 +61,12 @@ export const App = () => {
             onAddItem={() => setCurrentItem({ ...defaultItem })}
           />
         ) : (
-          <div>
-            {items.map((item) => (
-              <h1>{item.name}</h1>
-            ))}
-          </div>
+          <ItemTable
+            items={items}
+            onAdd={() => setCurrentItem({ ...defaultItem })}
+            onEdit={setCurrentItem}
+            onDelete={onDelete}
+          />
         )}
       </div>
 
