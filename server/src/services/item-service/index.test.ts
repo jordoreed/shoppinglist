@@ -1,12 +1,13 @@
-import * as ItemService from './index';
-import knexfile from '../../database/knexfile';
 import Knex, { Knex as KnexType } from 'knex';
+
+import knexfile from '../../database/knexfile';
+import * as ItemService from './index';
 
 describe('game service', () => {
   let knex: KnexType;
 
   beforeEach(async () => {
-    knex = Knex(knexfile.test);
+    knex = Knex(knexfile.default);
     await knex.migrate.latest();
     await knex.seed.run();
   });
@@ -24,7 +25,7 @@ describe('game service', () => {
       },
       knex
     );
-    const item = await ItemService.find(id, knex);
+    const item = await ItemService.find(`${id}`, knex);
 
     expect(item?.name).toEqual('super duper');
     expect(item?.description).toEqual('super awesome thing');
@@ -34,17 +35,17 @@ describe('game service', () => {
   });
 
   it('should update an item', async () => {
-    const beforeUpdate = await ItemService.find(1, knex);
+    const beforeUpdate = await ItemService.find('1', knex);
     await ItemService.update(
       {
-        id: 1,
+        id: '1',
         name: 'updated name',
         description: 'updated description',
         quantity: 1234,
       },
       knex
     );
-    const afterUpdate = await ItemService.find(1, knex);
+    const afterUpdate = await ItemService.find('1', knex);
 
     expect(beforeUpdate).toMatchObject({
       name: 'item 1',
@@ -59,9 +60,9 @@ describe('game service', () => {
   });
 
   it('should delete an item', async () => {
-    const beforeDelete = await ItemService.find(1, knex);
-    await ItemService.remove(1, knex);
-    const afterDelete = await ItemService.find(1, knex);
+    const beforeDelete = await ItemService.find('1', knex);
+    await ItemService.remove('1', knex);
+    const afterDelete = await ItemService.find('1', knex);
 
     expect(beforeDelete).toMatchObject({
       name: 'item 1',

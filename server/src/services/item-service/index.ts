@@ -1,6 +1,6 @@
 import { knex } from '../../database';
 
-import { Item } from 'types/item';
+import { Item } from '../../shared';
 
 export const create = async (
   { name, description, quantity }: Omit<Item, 'id' | 'createdAt' | 'updatedAt'>,

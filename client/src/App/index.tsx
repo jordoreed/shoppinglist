@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -56,17 +57,22 @@ export const App = () => {
     <div className={styles.app}>
       <header className={styles.header}>SHOPPING LIST</header>
       <div className={styles.body}>
-        {items.length === 0 ? (
-          <ListEmptyState
-            onAddItem={() => setCurrentItem({ ...defaultItem })}
-          />
-        ) : (
-          <ItemTable
-            items={items}
-            onAdd={() => setCurrentItem({ ...defaultItem })}
-            onEdit={setCurrentItem}
-            onDelete={onDelete}
-          />
+        {loading && <CircularProgress />}
+        {!loading && (
+          <>
+            {items.length === 0 ? (
+              <ListEmptyState
+                onAddItem={() => setCurrentItem({ ...defaultItem })}
+              />
+            ) : (
+              <ItemTable
+                items={items}
+                onAdd={() => setCurrentItem({ ...defaultItem })}
+                onEdit={setCurrentItem}
+                onDelete={onDelete}
+              />
+            )}
+          </>
         )}
       </div>
 

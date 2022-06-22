@@ -7,13 +7,14 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
-import { Item } from '@server/types/item';
+import { Item } from '@shared/index';
 
 import styles from './index.module.css';
 
-const MAX_QUANTITY = 3;
-
 export type FormItem = Omit<Item, 'createdAt' | 'updatedAt'>;
+
+const MAX_DESCRIPTION_LENGTH = 100;
+const MAX_QUANTITY = 3;
 
 type ItemFormProps = {
   item: FormItem;
@@ -40,8 +41,12 @@ export const ItemForm = React.forwardRef<HTMLFormElement, ItemFormProps>(
           return false;
         }}
       >
-        <h2>{isNewItem ? 'Add an item' : 'Edit an item'}</h2>
-        <p>{isNewItem ? 'Add your new item below' : 'Edit your item below'}</p>
+        <div className={styles.formHeader}>
+          {isNewItem ? 'Add an item' : 'Edit an item'}
+        </div>
+        <div className={styles.formSubheader}>
+          {isNewItem ? 'Add your new item below' : 'Edit your item below'}
+        </div>
 
         <TextField
           label="Item Name"
@@ -57,20 +62,26 @@ export const ItemForm = React.forwardRef<HTMLFormElement, ItemFormProps>(
           }}
         />
 
-        <TextField
-          label="Description"
-          variant="outlined"
-          className={styles.input}
-          value={item.description}
-          multiline
-          rows={5}
-          onChange={(event) => {
-            setItem({
-              ...item,
-              description: event.target.value,
-            });
-          }}
-        />
+        <div className={styles.descriptionContainer}>
+          <TextField
+            label="Description"
+            variant="outlined"
+            className={[styles.input, styles.description].join(' ')}
+            value={item.description}
+            inputProps={{ maxLength: MAX_DESCRIPTION_LENGTH }}
+            multiline
+            rows={5}
+            onChange={(event) => {
+              setItem({
+                ...item,
+                description: event.target.value,
+              });
+            }}
+          />
+          <div className={styles.charCounter}>
+            {item.description?.length || 0} / {MAX_DESCRIPTION_LENGTH}
+          </div>
+        </div>
 
         <FormControl fullWidth>
           <InputLabel id="item-quantity-select-label">Quantity</InputLabel>

@@ -1,13 +1,7 @@
 import { FC, useState } from 'react';
-import {
-  Button,
-  IconButton,
-  Checkbox,
-  Dialog,
-  Typography,
-} from '@mui/material';
+import { Button, IconButton, Checkbox, Dialog } from '@mui/material';
 
-import { Item } from '@server/types/item';
+import { Item } from '@shared/index';
 
 import styles from './index.module.css';
 
@@ -93,7 +87,9 @@ const ItemRow: FC<ItemRowProps> = ({ item, onEdit, onDelete }) => {
 
       <div className={styles.nameDescription}>
         <div className={styles.name}>{item.name}</div>
-        <div className={styles.description}>{item.description}</div>
+        {item.description && (
+          <div className={styles.description}>{item.description}</div>
+        )}
       </div>
 
       <IconButton aria-label="delete" size="large" onClick={onEdit}>

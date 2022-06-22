@@ -7,3 +7,31 @@
 .form .input {
   margin-bottom: 1rem;
 }
+
+.formHeader {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.formSubheader {
+  color: #5c6269;
+  margin-bottom: 1rem;
+}
+
+.descriptionContainer {
+  position: relative;
+  width: 100%;
+}
+
+.description {
+  width: 100%;
+}
+
+.charCounter {
+  position: absolute;
+  bottom: 2rem;
+  right: 1rem;
+  z-index: 1000;
+  color: #5c6269;
+  font-size: 0.75rem;
+}

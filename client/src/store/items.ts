@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { Item } from '@server/types/item';
+import { Item } from '@shared/index';
 import { FormItem } from '../components/ItemForm';
 
 export interface ItemsState {
