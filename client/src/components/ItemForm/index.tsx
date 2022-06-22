@@ -4,6 +4,8 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  Checkbox,
+  FormControlLabel,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
@@ -108,6 +110,24 @@ export const ItemForm = React.forwardRef<HTMLFormElement, ItemFormProps>(
             })}
           </Select>
         </FormControl>
+
+        {!isNewItem && (
+          <FormControlLabel
+            style={{ marginTop: '1rem' }}
+            control={
+              <Checkbox
+                checked={Boolean(item.purchased)}
+                onChange={(event) => {
+                  setItem({
+                    ...item,
+                    purchased: event.target.checked ? 1 : 0,
+                  });
+                }}
+              />
+            }
+            label="Purchased"
+          />
+        )}
       </form>
     );
   }

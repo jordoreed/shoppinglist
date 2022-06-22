@@ -16,6 +16,7 @@ const defaultItem: FormItem = {
   name: '',
   description: '',
   quantity: 1,
+  purchased: 0,
 };
 
 export const App = () => {

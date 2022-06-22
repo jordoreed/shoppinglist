@@ -22,6 +22,7 @@ describe('game service', () => {
         name: 'super duper',
         description: 'super awesome thing',
         quantity: 2,
+        purchased: 0,
       },
       knex
     );
@@ -30,6 +31,7 @@ describe('game service', () => {
     expect(item?.name).toEqual('super duper');
     expect(item?.description).toEqual('super awesome thing');
     expect(item?.quantity).toEqual(2);
+    expect(item?.purchased).toEqual(0);
     expect(item?.createdAt).toBeTruthy();
     expect(item?.updatedAt).toBeTruthy();
   });
@@ -42,6 +44,7 @@ describe('game service', () => {
         name: 'updated name',
         description: 'updated description',
         quantity: 1234,
+        purchased: 1,
       },
       knex
     );
@@ -51,11 +54,13 @@ describe('game service', () => {
       name: 'item 1',
       description: 'description 1',
       quantity: 10,
+      purchased: 0,
     });
     expect(afterUpdate).toMatchObject({
       name: 'updated name',
       description: 'updated description',
       quantity: 1234,
+      purchased: 1,
     });
   });
 

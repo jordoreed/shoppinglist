@@ -12,6 +12,7 @@ export const router = Router();
 const createUpdateValidation = [
   body('name').notEmpty(),
   body('description').isLength({ max: MAX_DESCRIPTION_LENGTH }),
+  body('purchased').isBoolean(),
   body('quantity').isInt({ min: 0, max: MAX_QUANTITY }),
 ];
 

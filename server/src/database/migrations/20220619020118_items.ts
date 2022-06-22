@@ -6,6 +6,7 @@ export const up = async (knex: Knex): Promise<void> => {
     table.string('name').notNullable();
     table.string('description').nullable();
     table.integer('quantity').notNullable();
+    table.boolean('purchased').notNullable().defaultTo(false);
     table.timestamps(true, true);
   });
 };

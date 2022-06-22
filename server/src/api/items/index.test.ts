@@ -32,6 +32,11 @@ describe('/api/items', () => {
         {
           location: 'body',
           msg: 'Invalid value',
+          param: 'purchased',
+        },
+        {
+          location: 'body',
+          msg: 'Invalid value',
           param: 'quantity',
           value: -1,
         },

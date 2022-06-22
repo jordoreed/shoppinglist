@@ -2,6 +2,8 @@ import { FC, useState } from 'react';
 import { Button, IconButton, Checkbox, Dialog } from '@mui/material';
 
 import { Item } from '@shared/index';
+import { useAppDispatch } from '../../store';
+import { updateItem } from '../../store/items';
 
 import styles from './index.module.css';
 
@@ -71,18 +73,29 @@ type ItemRowProps = {
 };
 
 const ItemRow: FC<ItemRowProps> = ({ item, onEdit, onDelete }) => {
-  const [checked, setChecked] = useState(false);
+  const dispatch = useAppDispatch();
+  const [checked, setChecked] = useState(item.purchased);
 
   const classes = [styles.row];
   if (checked) {
     classes.push(styles.checked);
   }
 
+  const handleCheckboxChange = (updated: number) => {
+    setChecked(updated);
+    dispatch(
+      updateItem({
+        ...item,
+        purchased: updated,
+      })
+    );
+  };
+
   return (
     <div className={classes.join(' ')}>
       <Checkbox
-        checked={checked}
-        onChange={(event) => setChecked(event.target.checked)}
+        checked={Boolean(checked)}
+        onChange={(event) => handleCheckboxChange(event.target.checked ? 1 : 0)}
       />
 
       <div className={styles.nameDescription}>

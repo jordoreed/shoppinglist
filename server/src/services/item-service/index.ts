@@ -3,13 +3,19 @@ import { knex } from '../../database';
 import { Item } from '../../shared';
 
 export const create = async (
-  { name, description, quantity }: Omit<Item, 'id' | 'createdAt' | 'updatedAt'>,
+  {
+    name,
+    description,
+    quantity,
+    purchased,
+  }: Omit<Item, 'id' | 'createdAt' | 'updatedAt'>,
   db = knex
 ) =>
   await db('items').insert({
     name,
     description,
     quantity,
+    purchased,
   });
 
 export const search = async (db = knex): Promise<Item[]> =>
